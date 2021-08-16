@@ -14,7 +14,7 @@ class MineMapView extends StatefulWidget {
   const MineMapView({
     Key key,
     @required this.onMineMapViewCreated,
-    this.mapOptions,
+    @required this.mapOptions,
   }) : super(key: key);
 
   final MineMapViewCreatedCallback onMineMapViewCreated;

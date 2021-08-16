@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:layout_width="fill_parent"
+              android:layout_height="fill_parent"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical">
+
+    <com.minedata.minemap.map.MapView
+        android:id="@+id/mapview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:minemap_apiBaseUrl="@string/minemap_apiBaseUrl"
+        app:minemap_apiUrl="@string/minemap_apiUrl"
+        app:minemap_spriteGlyphsUrl="@string/minemap_spriteGlyphsUrl">
+
+    </com.minedata.minemap.map.MapView>
+
+    <RadioGroup
+        android:id="@+id/radio_group"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:background="@color/colorLightGrey"
+        >
+        <RadioButton
+            android:id="@+id/style_base"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="基础地图"/>
+
+        <RadioButton
+            android:id="@+id/style_black"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="黑夜地图"/>
+
+        <RadioButton
+            android:id="@+id/style_gps"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="卫星地图"/>
+
+    </RadioGroup>
+
+    <RelativeLayout
+        android:id="@+id/zoom_layout"
+        android:layout_width="35dp"
+        android:layout_height="70dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="15dp"
+        android:layout_marginEnd="20dp"
+        android:background="@drawable/zoom_bg">
+
+        <View
+            android:id="@+id/moddelLine"
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_centerInParent="true"
+            android:background="@color/divide_line_color"
+            android:padding="1dp"/>
+
+        <ImageView
+            android:id="@+id/zoomin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@id/moddelLine"
+            android:background="@drawable/zoom_in_bg"
+            android:onClick="zoomIn"
+            android:scaleType="center"
+            android:src="@mipmap/zoom_in_icon"/>
+
+        <ImageView
+            android:id="@+id/zoomout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/moddelLine"
+            android:background="@drawable/zoom_out_bg"
+            android:onClick="zoomOut"
+            android:scaleType="center"
+            android:src="@mipmap/zoom_out_icon"/>
+    </RelativeLayout>
+
+</RelativeLayout>

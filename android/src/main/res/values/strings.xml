@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">MineMapDemo</string>
+    <!--正式-->
+    <string name="map_style">https://www.minedata.cn/service/solu/style/id/12981</string>
+    <string name="minemap_apiBaseUrl">https://datahive.minedata.cn</string>
+    <string name="minemap_apiUrl">https://datahive.minedata.cn</string>
+    <string name="minemap_spriteGlyphsUrl">https://minedata.cn</string>
+    <!--    <string name="map_style">http://172.54.7.76/service/solu/style/id/4721</string>-->
+    <!--    <string name="minemap_apiBaseUrl">http://172.54.7.76</string>-->
+    <!--    <string name="minemap_apiUrl">http://172.54.7.76</string>-->
+    <!--    <string name="minemap_spriteGlyphsUrl">http://172.54.7.76</string>-->
+
+    <!--    <string name="minemap_spriteGlyphsUrl">http://211.151.84.33:8086</string>-->
+    <string name="show_missing_permission">"当前应用缺少必要权限。\n请点击\"设置\"-\"权限\"-打开所需权限。"</string>
+    <string name="hide_logo">隐藏Logo</string>
+    <string name="show_logo">显示Logo</string>
+
+    <string name="hide_compass">隐藏指南针</string>
+    <string name="show_compass">显示指南针</string>
+    <string name="toGCJ02">转换为GCJ02坐标</string>
+    <string name="toWGS84">转换为WGS84坐标</string>
+    <string name="distance">测距</string>
+    <string name="area">测面积</string>
+    <string name="add_markerlayer">添加点</string>
+    <string name="add_polyLinelayer">添加添加线</string>
+    <string name="add_fillLayer">添加面</string>
+    <string name="snapshot">截屏</string>
+    <string name="gradient">渐变</string>
+    <string name="category_ue" />
+</resources><!--    http://172.54.7.76/service/solu/style/id/4721-->
+    <!--    http://172.54.7.76/operate/view?solution=4721&accessToken=36ae46c3e306465a84420ee7903ad1de-->
+    <!--    这两个是可以访问到的话，xml 光IP地址就可以了-->

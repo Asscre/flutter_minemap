@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--2度圆角矩形-->
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners android:radius="4dp" />
+    <solid android:color="#ffffff" />
+    <stroke
+        android:width="1px"
+        android:color="@color/divide_line_color" />
+</shape>

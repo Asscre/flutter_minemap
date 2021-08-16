@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+    <color name="divide_line_color">#eaeaea</color><!-- 分割线色 -->
+    <color name="divide_view_color">#f0f0f0</color><!-- 分割块色 -->
+    <color name="white">#ffffff</color><!--主题颜色-->
+    <color name="black_06">#0f000000</color><!-- 黑色透明6%push色 -->
+
+    <color name="colorWhite">#ffffff</color>
+    <color name="colorWhite50">#78ffffff</color>
+    <color name="colorWhite80">#b4ffffff</color>
+    <color name="colorOrange">#f99e3a</color>
+    <color name="colorLightGrey">#F2F2F2</color>
+    <color name="colorBlack">#060606</color>
+    <color name="colorBlue">#6478D3</color>
+    <color name="colorGreen">#51DC8E</color>
+    <color name="colorGrey">#a3a3a3</color><!-- 灰色字 -->
+    <color name="colorRed">#FC0000</color><!-- 灰色字 -->
+
+
+
+</resources>

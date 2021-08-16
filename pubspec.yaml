@@ -1,8 +1,9 @@
 name: flutter_minemap
 description:  An `MineDate` Map Component.
-version: 0.0.1
-author: Asscre <237713070@qq.com>
+version: 0.0.1+dev.1
+# author: Asscre <237713070@qq.com>
 homepage: https://github.com/Asscre/flutter_minemap
+publish_to: none
 
 environment:
   sdk: ">=2.7.0 <3.0.0"

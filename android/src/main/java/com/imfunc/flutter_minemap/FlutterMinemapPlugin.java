@@ -13,9 +13,12 @@ import io.flutter.embedding.engine.plugins.FlutterPlugin;
 public class FlutterMinemapPlugin implements FlutterPlugin {
 
     private static String NATIVE_VIEW_TYPE_ID = "flutter_minemap";
+    private static boolean isLibraryLoaded = false;
+
 
     @Override
     public void onAttachedToEngine(@NonNull FlutterPluginBinding binding) {
+        loadLibrary();
         binding
                 .getPlatformViewRegistry()
                 .registerViewFactory(NATIVE_VIEW_TYPE_ID, new MineViewFactory(binding.getBinaryMessenger()));
@@ -23,5 +26,14 @@ public class FlutterMinemapPlugin implements FlutterPlugin {
 
     @Override
     public void onDetachedFromEngine(@NonNull FlutterPluginBinding binding) {
+    }
+
+    private static void loadLibrary() {
+        if (isLibraryLoaded) {
+            return;
+        }
+
+        System.loadLibrary("libminemap-gl.so");
+        isLibraryLoaded = true;
     }
 }

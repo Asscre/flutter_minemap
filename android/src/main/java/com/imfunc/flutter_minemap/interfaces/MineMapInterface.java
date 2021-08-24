@@ -4,7 +4,7 @@ import com.minedata.minemap.geometry.LatLng;
 
 public interface MineMapInterface {
 
-    void setMapType(String mapType);
+    void setMapType(Integer mapType);
 
     void setTrafficEnabled(Boolean enabled);
 

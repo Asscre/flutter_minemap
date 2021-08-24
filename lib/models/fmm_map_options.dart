@@ -90,6 +90,7 @@ class FMMMapOptions {
 
   /// offlineAccessToken
   String offlineAccessToken;
+
   /// solution
   String solution;
 
@@ -105,7 +106,7 @@ class FMMMapOptions {
     this.bearing,
     this.wmtsEnabled,
     this.repaint,
-    this.showDebugActive:true,
+    this.showDebugActive: true,
     this.fillWaterEnabled,
     this.connected,
     this.compassEnabled: true,

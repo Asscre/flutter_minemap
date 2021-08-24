@@ -23,9 +23,9 @@ class _MapDemoPageState extends State<MapDemoPage> {
         alignment: Alignment.center,
         child: MineMapView(
           mapOptions: FMMMapOptions(
-            accessToken: '',
-            offlineAccessToken: '',
-            solution: '',
+            offlineAccessToken: 'dcb383d440ba454b8d18d08f66086c5e',
+            accessToken: 'a798a2cdcbf549709e33af499f1b708d',
+            solution: '15741',
           ),
           onMineMapViewCreated: (MineMapController controller) {
             _mineMapController = controller;

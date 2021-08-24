@@ -27,7 +27,7 @@ class MineMapView extends StatefulWidget {
 }
 
 class _MineMapViewState extends State<MineMapView> {
-  final String viewType = 'flutter_minemap';
+  final String viewType = 'flutter_minemap/map/FMMMapView';
 
   @override
   Widget build(BuildContext context) {

@@ -84,21 +84,21 @@ public class MineViewFactory extends PlatformViewFactory {
         if (args.containsKey("minZoomLevel") ) {
             Integer minZoomLevel = FMMMapConveter.toInt(args.get("minZoomLevel"));
             if (minZoomLevel != null) {
-                builder.mapType(minZoomLevel);
+                builder.minZoomLevel(minZoomLevel);
             }
         }
 
         if (args.containsKey("tilt") ) {
             Integer tilt = FMMMapConveter.toInt(args.get("tilt"));
             if (tilt != null) {
-                builder.mapType(tilt);
+                builder.tilt(tilt);
             }
         }
 
         if (args.containsKey("bearing") ) {
             Integer bearing = FMMMapConveter.toInt(args.get("bearing"));
             if (bearing != null) {
-                builder.mapType(bearing);
+                builder.bearing(bearing);
             }
         }
 

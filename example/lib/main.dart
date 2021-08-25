@@ -1,9 +1,5 @@
 import 'package:flutter/material.dart';
-import 'dart:async';
-
-import 'package:flutter/services.dart';
-import 'package:flutter_minemap/flutter_minemap.dart';
-import 'package:flutter_minemap_example/map_demo_page.dart';
+import 'package:flutter_minemap_example/index_page.dart';
 
 void main() {
   runApp(MyApp());
@@ -48,34 +44,6 @@ class _MyAppState extends State<MyApp> {
     return MaterialApp(
       title: 'FlutterMinemap',
       home: IndexPage(),
-    );
-  }
-}
-
-class IndexPage extends StatelessWidget {
-  const IndexPage({Key key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Plugin example app'),
-      ),
-      body: Center(
-        child: Column(
-          children: [
-            TextButton(
-              onPressed: () => Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => MapDemoPage(),
-                ),
-              ),
-              child: Text('跳转到地图'),
-            ),
-          ],
-        ),
-      ),
     );
   }
 }

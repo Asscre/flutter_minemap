@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import com.imfunc.flutter_minemap.interfaces.MineMapInterface;
 import com.imfunc.flutter_minemap.unil.Config;
 import com.imfunc.flutter_minemap.unil.Constants;
+import com.imfunc.flutter_minemap.unil.conveter.FMMMapConveter;
 import com.minedata.minemap.MinemapAccountManager;
 import com.minedata.minemap.camera.CameraPosition;
 import com.minedata.minemap.geometry.LatLng;
@@ -39,13 +40,22 @@ public class FMMMapController implements MethodChannel.MethodCallHandler, Applic
 
     private final MethodChannel mMethodChannel;
 
-    public FMMMapController(int id, Context context, BinaryMessenger binaryMessenger, @Nullable Map<String, Object> creationParams) {
+    public FMMMapController(int id, Context context, BinaryMessenger binaryMessenger, Map<String, Object> creationParams) {
 
         mContext = context;
 
         this.application = ((Application) (context.getApplicationContext()));
         this.application.registerActivityLifecycleCallbacks(this);
 
+        mMethodChannel = new MethodChannel(binaryMessenger,
+                Constants.VIEW_METHOD_CHANNEL_PREFIX + id);
+        mMethodChannel.setMethodCallHandler(this);
+
+        initMap(creationParams);
+    }
+
+    ///  初始化地图组件
+    private void initMap(Map<String, Object> creationParams) {
         String accessToken = creationParams.get("accessToken").toString();
         String offlineAccessToken = creationParams.get("offlineAccessToken").toString();
         String solution = creationParams.get("solution").toString();
@@ -58,8 +68,21 @@ public class FMMMapController implements MethodChannel.MethodCallHandler, Applic
 
         mapView.addMapRenderCallback(new MapView.OnMapReadyListener() {
             @Override
-            public void onMapReady(final MineMap mineMap) {
-                FMMMapController.mineMap = mineMap;
+            public void onMapReady(final MineMap oMineMap) {
+                mineMap = oMineMap;
+
+                mineMap.setStyleUrl(Config.mBase);
+                mineMap.setCameraPosition(
+                        new CameraPosition.Builder()
+                                // 设置相机指向的位置
+                                .target(new LatLng(38.913828, 116.405419))
+                                // 设置相机缩放等级
+                                .zoom(13)
+                                // 设置相机的俯视角度
+                                .tilt(0)
+                                // 摄像机指向的方向,从北部顺时针方向设置
+                                .bearing(0)
+                                .build());
             }
         });
 
@@ -68,11 +91,6 @@ public class FMMMapController implements MethodChannel.MethodCallHandler, Applic
         if (mineMap != null) {
             uiSettings = mineMap.getUiSettings();
         }
-
-        mMethodChannel = new MethodChannel(binaryMessenger,
-                Constants.VIEW_METHOD_CHANNEL_PREFIX + id);
-
-        mMethodChannel.setMethodCallHandler(this);
     }
 
     public MapView getMapView() {
@@ -204,7 +222,7 @@ public class FMMMapController implements MethodChannel.MethodCallHandler, Applic
     @Override
     public void setLogoEnabled(Boolean enabled) {
         if (mineMap != null && enabled != null) {
-            uiSettings.setLogoEnabled(enabled);
+            mineMap.getUiSettings().setLogoEnabled(enabled);
         }
     }
 

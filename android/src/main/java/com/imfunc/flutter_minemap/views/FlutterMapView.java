@@ -34,11 +34,19 @@ public class FlutterMapView implements PlatformView {
     public View getView() {
         Log.d(TAG, "getView");
         return mapView;
-
     }
 
     @Override
     public void dispose() {
+        Log.d(TAG, "dispose");
 
+//        if (null != mMapController) {
+//            mMapController.release();
+//        }
+//
+//        if (null != mapView) {
+//            mapView.onDestroy();
+//            mapView = null;
+//        }
     }
 }

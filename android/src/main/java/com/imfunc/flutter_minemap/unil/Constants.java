@@ -9,4 +9,11 @@ public class Constants {
     public static class ViewType {
         public static final String sMapView = "flutter_minemap/map/FMMMapView";
     }
+
+    /**
+     * 地图状态
+     */
+    public static class FMMMapStateMethodId {
+        public static final String sMapSetStyleMethod = "flutter_minemap/map/setStyleJson";
+    }
 }

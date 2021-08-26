@@ -1,4 +1,4 @@
-package com.imfunc.flutter_minemap.factory;
+package com.imfunc.flutter_minemap;
 
 import android.content.Context;
 

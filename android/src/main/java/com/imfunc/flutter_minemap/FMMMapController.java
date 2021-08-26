@@ -12,6 +12,7 @@ import com.imfunc.flutter_minemap.interfaces.MineMapInterface;
 import com.imfunc.flutter_minemap.unil.Config;
 import com.imfunc.flutter_minemap.unil.Constants;
 import com.imfunc.flutter_minemap.unil.conveter.FMMMapConveter;
+import com.imfunc.flutter_minemap.views.FMMMapHandler;
 import com.minedata.minemap.MinemapAccountManager;
 import com.minedata.minemap.camera.CameraPosition;
 import com.minedata.minemap.geometry.LatLng;
@@ -40,9 +41,11 @@ public class FMMMapController implements MethodChannel.MethodCallHandler, Applic
 
     private final MethodChannel mMethodChannel;
 
+    private FMMMapHandler fmmMapHandler;
+
     public FMMMapController(int id, Context context, BinaryMessenger binaryMessenger, Map<String, Object> creationParams) {
 
-        mContext = context;
+        this.mContext = context;
 
         this.application = ((Application) (context.getApplicationContext()));
         this.application.registerActivityLifecycleCallbacks(this);
@@ -51,7 +54,12 @@ public class FMMMapController implements MethodChannel.MethodCallHandler, Applic
                 Constants.VIEW_METHOD_CHANNEL_PREFIX + id);
         mMethodChannel.setMethodCallHandler(this);
 
+        fmmMapHandler = new FMMMapHandler(this);
         initMap(creationParams);
+    }
+
+    public void release() {
+        mMethodChannel.setMethodCallHandler(null);
     }
 
     ///  初始化地图组件
@@ -103,7 +111,15 @@ public class FMMMapController implements MethodChannel.MethodCallHandler, Applic
 
     @Override
     public void onMethodCall(@NonNull MethodCall call, @NonNull MethodChannel.Result result) {
+        if (null == mineMap) {
+            return;
+        }
 
+        fmmMapHandler.dispatchMethodHandler(call, result);
+    }
+
+    public MineMap getMineMap() {
+        return  mineMap;
     }
 
     @Override

@@ -11,15 +11,13 @@ import androidx.annotation.Nullable;
 import com.imfunc.flutter_minemap.interfaces.MineMapInterface;
 import com.imfunc.flutter_minemap.unil.Config;
 import com.imfunc.flutter_minemap.unil.Constants;
-import com.imfunc.flutter_minemap.unil.conveter.FMMMapConveter;
-import com.imfunc.flutter_minemap.views.FMMMapHandler;
+import com.imfunc.flutter_minemap.views.mapHandler.MMapHandlerFactory;
 import com.minedata.minemap.MinemapAccountManager;
 import com.minedata.minemap.camera.CameraPosition;
 import com.minedata.minemap.geometry.LatLng;
 import com.minedata.minemap.map.MapView;
 import com.minedata.minemap.map.MineMap;
 import com.minedata.minemap.map.UiSettings;
-import com.minemap.minemapsdk.maps.ImplMineMapOptions;
 
 import java.util.Map;
 
@@ -41,7 +39,7 @@ public class FMMMapController implements MethodChannel.MethodCallHandler, Applic
 
     private final MethodChannel mMethodChannel;
 
-    private FMMMapHandler fmmMapHandler;
+    private MMapHandlerFactory mMapHandlerFactory;
 
     public FMMMapController(int id, Context context, BinaryMessenger binaryMessenger, Map<String, Object> creationParams) {
 
@@ -50,16 +48,18 @@ public class FMMMapController implements MethodChannel.MethodCallHandler, Applic
         this.application = ((Application) (context.getApplicationContext()));
         this.application.registerActivityLifecycleCallbacks(this);
 
+        initMap(creationParams);
+
         mMethodChannel = new MethodChannel(binaryMessenger,
                 Constants.VIEW_METHOD_CHANNEL_PREFIX + id);
         mMethodChannel.setMethodCallHandler(this);
 
-        fmmMapHandler = new FMMMapHandler(this);
-        initMap(creationParams);
+        mMapHandlerFactory = new MMapHandlerFactory(this);
     }
 
     public void release() {
         mMethodChannel.setMethodCallHandler(null);
+        mMapHandlerFactory.release();
     }
 
     ///  初始化地图组件
@@ -115,7 +115,7 @@ public class FMMMapController implements MethodChannel.MethodCallHandler, Applic
             return;
         }
 
-        fmmMapHandler.dispatchMethodHandler(call, result);
+        mMapHandlerFactory.dispatchMethodHandler(mContext, call, result);
     }
 
     public MineMap getMineMap() {

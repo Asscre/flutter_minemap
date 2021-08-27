@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_minemap_example/view/base_map_page.dart';
+import 'package:flutter_minemap_example/view/cluster_layer_page.dart';
 import 'package:flutter_minemap_example/view/map_style_page.dart';
 
 class IndexPage extends StatefulWidget {
@@ -109,7 +110,14 @@ class _IndexPageState extends State<IndexPage> {
       BTNWidgetClass('大规模图标图', '往地图上添加大规模图标', () {}),
       BTNWidgetClass('热力图', '', () {}),
       BTNWidgetClass('柱状图', '往地图上添加柱状图层', () {}),
-      BTNWidgetClass('点聚合图', '往地图上添加点聚合图层', () {}),
+      BTNWidgetClass(
+        '点聚合图',
+        '往地图上添加点聚合图层',
+        () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (_) => ClusterLayerPage()),
+        ),
+      ),
       BTNWidgetClass('波形圈', '往地图上添加波形圈图层', () {}),
       BTNWidgetClass('OD迁徙图', '往地图上添加OD迁徙图层', () {}),
       BTNWidgetClass('航线地图', '往地图上添加航线图层', () {}),

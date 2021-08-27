@@ -35,6 +35,20 @@ class MineMapController {
     return result;
   }
 
+  /// 添加聚合点图层
+  Future<bool> addClusterLayer() async {
+    if (_mapChannel == null) {
+      return false;
+    }
+    bool result = false;
+    try {
+      result = (await _mapChannel.invokeMethod(FMMClusterLayerMethodId.kMapAddClusterLayerMethod)) as bool;
+    } on PlatformException catch (e) {
+      print(e.toString());
+    }
+    return result;
+  }
+
   /// 地图代理回调
   ///
   /// native -> flutter

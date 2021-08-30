@@ -2,6 +2,8 @@ package com.imfunc.flutter_minemap.unil.conveter;
 
 import com.minedata.minemap.geometry.LatLng;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -52,6 +54,36 @@ public class FMMMapConveter {
             return null;
         }
         return new LatLng((double) latitudeObj, (double) longitudeObj);
+    }
+
+    /**
+     * 将多个map形式的经纬度信息转换为结构化的经纬度数据
+     *
+     * @param latlngList
+     * @return
+     */
+    public static List<LatLng> mapToLatlngs(List<Map<String, Double>> latlngList) {
+        if (null == latlngList) {
+            return null;
+        }
+
+        Iterator itr = latlngList.iterator();
+        ArrayList<LatLng> latLngs = new ArrayList<>();
+        while (itr.hasNext()) {
+            Map<String, Object> latlngMap = (Map<String, Object>) itr.next();
+            LatLng latLng = mapToLatlng(latlngMap);
+            if (null == latLng) {
+                break;
+            }
+
+            latLngs.add(latLng);
+        }
+
+        if (latLngs.size() != latlngList.size()) {
+            return null;
+        }
+
+        return latLngs;
     }
 
 }

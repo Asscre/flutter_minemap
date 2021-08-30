@@ -1,10 +1,10 @@
 import 'package:flutter/services.dart';
 import 'package:flutter_minemap/models/fmm_types.dart';
+import 'package:flutter_minemap/models/overlays/cluster_layer_model.dart';
 import 'package:flutter_minemap/private/fmm_method_channel_handler.dart';
 import 'package:flutter_minemap/private/fmm_method_id.dart';
 
 class MineMapController {
-
   MethodChannel _mapChannel;
 
   FMMMethodChannelHandler _methodChannelHandler;
@@ -28,7 +28,8 @@ class MineMapController {
     }
     bool result = false;
     try {
-      result = (await _mapChannel.invokeMethod(FMMMapStateMethodId.kMapSetStyleMethod, fmmMapType.index)) as bool;
+      result = (await _mapChannel.invokeMethod(
+          FMMMapStateMethodId.kMapSetStyleMethod, fmmMapType.index)) as bool;
     } on PlatformException catch (e) {
       print(e.toString());
     }
@@ -36,13 +37,33 @@ class MineMapController {
   }
 
   /// 添加聚合点图层
-  Future<bool> addClusterLayer() async {
+  Future<bool> addClusterLayer(ClusterLayerModel params) async {
+    print(params);
     if (_mapChannel == null) {
       return false;
     }
     bool result = false;
     try {
-      result = (await _mapChannel.invokeMethod(FMMClusterLayerMethodId.kMapAddClusterLayerMethod)) as bool;
+      result = (await _mapChannel.invokeMethod(
+        FMMClusterLayerMethodId.kMapAddClusterLayerMethod,
+        params.toMap(),
+      )) as bool;
+    } on PlatformException catch (e) {
+      print(e.toString());
+    }
+    return result;
+  }
+
+  /// 添加聚合点图层
+  Future<bool> clearClusterLayer() async {
+    if (_mapChannel == null) {
+      return false;
+    }
+    bool result = false;
+    try {
+      result = (await _mapChannel.invokeMethod(
+        FMMClusterLayerMethodId.kMapClearClusterLayerMethod,
+      )) as bool;
     } on PlatformException catch (e) {
       print(e.toString());
     }

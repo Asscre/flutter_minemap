@@ -1,7 +1,11 @@
+import 'dart:io';
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_minemap/flutter_minemap.dart';
 import 'package:flutter_minemap/models/fmm_map_models.dart';
 import 'package:flutter_minemap/models/fmm_types.dart';
+import 'package:flutter_minemap_example/assets/exp_city_data.dart';
 import 'package:flutter_minemap_example/common/scaffold_widget.dart';
 import 'package:flutter_minemap_example/config/config.dart';
 
@@ -16,11 +20,19 @@ class _ClusterLayerPageState extends State<ClusterLayerPage> {
   MineMapController _mineMapController;
 
   @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return ScaffoldWidget(
       title: '点聚合图',
       child: Column(
-        children: [_map(), _btnListWidget()],
+        children: [
+          _map(),
+          _btnListWidget(),
+        ],
       ),
     );
   }
@@ -46,10 +58,11 @@ class _ClusterLayerPageState extends State<ClusterLayerPage> {
   Widget _btnListWidget() {
     final List<ClusterLayerPageBtnModel> _btnL = [
       ClusterLayerPageBtnModel(
-          '添加聚合点图层', () => _mineMapController.addClusterLayer()),
-      ClusterLayerPageBtnModel('添加聚合点图层集合', () {}),
-      ClusterLayerPageBtnModel('清空聚合点图层', () {}),
-      ClusterLayerPageBtnModel('删除聚合点图层', () {}),
+          '添加聚合点图层', () => _mineMapController.addClusterLayer(_clusterLayer())),
+      ClusterLayerPageBtnModel(
+          '清空聚合点图层', () => _mineMapController.clearClusterLayer()),
+      // ClusterLayerPageBtnModel('清空聚合点图层', () {}),
+      // ClusterLayerPageBtnModel('删除聚合点图层', () {}),
     ];
 
     List<Widget> _l = [];
@@ -71,6 +84,16 @@ class _ClusterLayerPageState extends State<ClusterLayerPage> {
       ),
     );
   }
+
+  ClusterLayerModel _clusterLayer() {
+    List<FMMCoordinate> _l = [];
+    ExpCityData.forEach((e) {
+      _l.add(FMMCoordinate(
+          double.parse(e['latitude']), double.parse(e['longitude'])));
+    });
+    return ClusterLayerModel(latLngs: _l);
+  }
+
 }
 
 class ClusterLayerPageBtnModel {

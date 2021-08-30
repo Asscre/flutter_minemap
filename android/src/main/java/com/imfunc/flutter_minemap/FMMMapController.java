@@ -83,9 +83,10 @@ public class FMMMapController implements MethodChannel.MethodCallHandler, Applic
                 mineMap.setCameraPosition(
                         new CameraPosition.Builder()
                                 // 设置相机指向的位置
-                                .target(new LatLng(38.913828, 116.405419))
+                                // 116.404844,39.912057
+                                .target(new LatLng(39.912057, 116.404269))
                                 // 设置相机缩放等级
-                                .zoom(13)
+                                .zoom(8)
                                 // 设置相机的俯视角度
                                 .tilt(0)
                                 // 摄像机指向的方向,从北部顺时针方向设置

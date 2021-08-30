@@ -9,6 +9,7 @@ import android.text.TextUtils;
 import com.imfunc.flutter_minemap.FMMMapController;
 import com.imfunc.flutter_minemap.R;
 import com.imfunc.flutter_minemap.unil.Constants;
+import com.imfunc.flutter_minemap.unil.conveter.FMMMapConveter;
 import com.minedata.minemap.geometry.LatLng;
 import com.minedata.minemap.overlay.ClusterLayer;
 import com.minedata.minemap.overlay.ClusterLayerOptions;
@@ -23,9 +24,10 @@ import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
 
 public class ClusterLayerHandler extends MMapHandler{
+    private ClusterLayer clusterLayer;
+    private ClusterLayerOptions options;
 
-    ClusterLayer clusterLayer;
-    
+
     public ClusterLayerHandler(FMMMapController mMapController) {
         super(mMapController);
     }
@@ -42,7 +44,10 @@ public class ClusterLayerHandler extends MMapHandler{
 
         switch (methodId) {
             case Constants.FMMClusterLayerMethodId.sMapAddClusterLayerMethod:
-                addClusterLayer(context, call, result);
+                addAllClusterLayer(context, call, result);
+                break;
+            case Constants.FMMClusterLayerMethodId.sMapClearClusterLayerMethod:
+                clearClusterLayer(result);
                 break;
             default:
                 break;
@@ -50,68 +55,66 @@ public class ClusterLayerHandler extends MMapHandler{
     }
 
     /**
-     * 添加聚合点图层
+     * 添加聚合点图层集合
+     * @param context
      * @param call
      * @param result
      */
-    private void addClusterLayer(Context context, MethodCall call,
-                                 MethodChannel.Result result) {
+    private void addAllClusterLayer(Context context, MethodCall call,
+                                    MethodChannel.Result result) {
+        Map params = FMMMapConveter.toMap(call.arguments);
+        Integer clusterRadius = FMMMapConveter.toInt(params.get("clusterRadius"));
+        String textColor = (String) params.get("textColor");
+        Integer textFontSize = FMMMapConveter.toInt(params.get("textFontSize"));
+        Integer maxZoom = FMMMapConveter.toInt(params.get("maxZoom"));
+        Integer minZoom = FMMMapConveter.toInt(params.get("minZoom"));
+        List<LatLng>  latLngs = FMMMapConveter.mapToLatlngs((List<Map<String, Double>>) params.get("latLngs"));
 
-        if (clusterLayer != null) {
-            clusterLayer.clear();
-        }
+        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(),
+                R.drawable.minemap_mylocation_icon_default);
 
-        Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), R.drawable.minemap_mylocation_icon_default);
         String bitmapName = "cluster_icon";
         mMapController.getMineMap().addImage(bitmapName, bitmap);
         Map<Integer, String> icons = new HashMap<>();
         icons.put(0, bitmapName);
 
-        ClusterLayerOptions options =
-                new ClusterLayerOptions(true, "clusterlayer1", "clusterlayer2");
-        options.setClusterRadius(200);
-        options.setClusterTextColor(Color.parseColor("#ffff0000"));
-        options.setClusterTextFontSize(14);
-        options.setIcons(icons);
-        options.setMaxZoom(11);
-        options.setMinZoom(3);
-        List<MarkerLayerOptions.MarkerItem> items = new ArrayList<>();
-        LatLng latLng1 = new LatLng(38.913828, 116.405419);
-        LatLng latLng2 = new LatLng(38.873828, 116.405419);
-        MarkerLayerOptions.MarkerItem item1 = new MarkerLayerOptions.MarkerItem()
-                .icon(bitmapName)
-                .position(latLng1)
-                .iconRotate(30.0f);
-        MarkerLayerOptions.MarkerItem item2 = new MarkerLayerOptions.MarkerItem()
-                .textName("你好")
-                .position(latLng2)
-                .textRotate(0.0f);
-        items.add(item1);
-        items.add(item2);
-        options.addAll(items);
+        Long startTs = System.currentTimeMillis();
 
+        options =
+                new ClusterLayerOptions(true, "clusterlayer1" + startTs, "clusterlayer2" + startTs);
+        options.setClusterRadius(clusterRadius);
+        options.setClusterTextColor(Color.parseColor("#" + textColor));
+        options.setClusterTextFontSize(textFontSize);
+        options.setIcons(icons);
+        options.setMaxZoom(maxZoom);
+        options.setMinZoom(minZoom);
         clusterLayer = mMapController.getMineMap().addLayer(options);
+
+        List<MarkerLayerOptions.MarkerItem> items = new ArrayList<>();
+        for (int i = 0; i < latLngs.size(); i ++) {
+            MarkerLayerOptions.MarkerItem item = new MarkerLayerOptions.MarkerItem()
+                    .icon(bitmapName)
+                    .position(latLngs.get(i))
+                    .iconRotate(0f);
+            items.add(item);
+        }
+
+        options.addAll(items);
+        clusterLayer.update();
         result.success(true);
     }
 
     /**
-     * 添加聚合点图层集合
-     * @param call
-     * @param result
-     */
-    private void addAllClusterLayer(MethodCall call,
-                                    MethodChannel.Result result) {
-
-    }
-
-    /**
      * 清空聚合点图层
-     * @param call
      * @param result
      */
-    private void clearClusterLayer(MethodCall call,
+    private void clearClusterLayer(
                                    MethodChannel.Result result) {
-
+        if (null != clusterLayer && clusterLayer.isLayerExist()) {
+            clusterLayer.clear();
+            clusterLayer.update();
+        }
+        result.success(true);
     }
 
     /**

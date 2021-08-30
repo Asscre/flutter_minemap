@@ -48,6 +48,7 @@ public class MMapHandlerFactory {
                 mMapHandler = mMapHandlerHashMap.get(Constants.MMapHandlerType.MAP_STATE);
                 break;
             case Constants.FMMClusterLayerMethodId.sMapAddClusterLayerMethod:
+            case Constants.FMMClusterLayerMethodId.sMapClearClusterLayerMethod:
                 mMapHandler = mMapHandlerHashMap.get(Constants.MMapHandlerType.CLUSTER_LAYER);
                 break;
         }

@@ -74,7 +74,14 @@ class _IndexPageState extends State<IndexPage> {
           MaterialPageRoute(builder: (context) => BaseMapPage()),
         ),
       ),
-      BTNWidgetClass('基础地图', '地图视角边界', () {}),
+      BTNWidgetClass(
+        '基础地图',
+        '地图视角边界',
+        () => Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => BaseMapPage()),
+        ),
+      ),
       BTNWidgetClass('边界', '地图视角边界', () {}),
       BTNWidgetClass('Fragment', '如何制作一个Fragment', () {}),
       BTNWidgetClass('', '交互事件', () {}),

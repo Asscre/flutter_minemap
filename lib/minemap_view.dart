@@ -69,4 +69,28 @@ class _MineMapViewState extends State<MineMapView> {
     }
     widget.onMineMapViewCreated(MineMapController.withId(id));
   }
+
+  @override
+  void didChangeDependencies() {
+    print('didChangeDependencies');
+    super.didChangeDependencies();
+  }
+
+  @override
+  void dispose() {
+    print('implement dispose');
+    super.dispose();
+  }
+
+  @override
+  void didUpdateWidget(MineMapView oldWidget) {
+    print('didUpdateWidget');
+    super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void reassemble() {
+    print('reassemble');
+    super.reassemble();
+  }
 }

@@ -45,6 +45,7 @@ public class MMapHandlerFactory {
         /// 对不同类型的操作进行分治管理
         switch (methodId) {
             case Constants.FMMMapStateMethodId.sMapSetStyleMethod:
+            case Constants.FMMMapStateMethodId.sMapSetCenterMethod:
                 mMapHandler = mMapHandlerHashMap.get(Constants.MMapHandlerType.MAP_STATE);
                 break;
             case Constants.FMMClusterLayerMethodId.sMapAddClusterLayerMethod:

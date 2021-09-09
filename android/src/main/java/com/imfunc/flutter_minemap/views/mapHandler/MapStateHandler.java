@@ -5,7 +5,11 @@ import android.text.TextUtils;
 
 import com.imfunc.flutter_minemap.FMMMapController;
 import com.imfunc.flutter_minemap.unil.Constants;
+import com.imfunc.flutter_minemap.unil.conveter.FMMMapConveter;
+import com.minedata.minemap.geometry.LatLng;
 import com.minedata.minemap.map.MineMap;
+
+import java.util.Map;
 
 import io.flutter.plugin.common.MethodCall;
 import io.flutter.plugin.common.MethodChannel;
@@ -13,8 +17,7 @@ import io.flutter.plugin.common.MethodChannel;
 public class MapStateHandler extends MMapHandler {
     private static final String TAG = MapStateHandler.class.getSimpleName();
     private MineMap mineMap;
-    
-    
+
 
     public MapStateHandler(FMMMapController mMapController) {
         super(mMapController);
@@ -35,13 +38,27 @@ public class MapStateHandler extends MMapHandler {
             case Constants.FMMMapStateMethodId.sMapSetStyleMethod:
                 setMapType(call, result);
                 break;
+            case Constants.FMMMapStateMethodId.sMapSetCenterMethod:
+                setCenter(call, result);
+                break;
             default:
                 break;
         }
     }
 
     /**
+     * @param call
+     * @param result
+     */
+    private void setCenter(MethodCall call, MethodChannel.Result result) {
+        LatLng center = FMMMapConveter.mapToLatlng((Map<String, Object>) call.arguments);
+        mMapController.setCenter(center);
+        result.success(true);
+    }
+
+    /**
      * 设置地图样式
+     *
      * @param call
      * @param result
      */
@@ -50,7 +67,7 @@ public class MapStateHandler extends MMapHandler {
         Integer mapType = call.arguments();
 
         mMapController.setMapType(mapType);
-        
+
         result.success(true);
     }
 }

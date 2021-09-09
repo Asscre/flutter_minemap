@@ -15,6 +15,7 @@ public class Constants {
      */
     public static class FMMMapStateMethodId {
         public static final String sMapSetStyleMethod = "flutter_minemap/map/setStyleJson";
+        public static final String sMapSetCenterMethod = "flutter_minemap/map/setCenter";
     }
 
     /**

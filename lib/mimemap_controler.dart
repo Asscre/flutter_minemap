@@ -4,6 +4,8 @@ import 'package:flutter_minemap/models/overlays/cluster_layer_model.dart';
 import 'package:flutter_minemap/private/fmm_method_channel_handler.dart';
 import 'package:flutter_minemap/private/fmm_method_id.dart';
 
+import 'models/fmm_map_models.dart';
+
 class MineMapController {
   MethodChannel _mapChannel;
 
@@ -30,6 +32,21 @@ class MineMapController {
     try {
       result = (await _mapChannel.invokeMethod(
           FMMMapStateMethodId.kMapSetStyleMethod, fmmMapType.index)) as bool;
+    } on PlatformException catch (e) {
+      print(e.toString());
+    }
+    return result;
+  }
+
+  /// 设置中心点
+  Future<bool> setMapCenter(FMMCoordinate coordinate) async {
+    if (_mapChannel == null) {
+      return false;
+    }
+    bool result = false;
+    try {
+      result = (await _mapChannel.invokeMethod(
+          FMMMapStateMethodId.kMapSetCenterMethod, coordinate.toMap())) as bool;
     } on PlatformException catch (e) {
       print(e.toString());
     }

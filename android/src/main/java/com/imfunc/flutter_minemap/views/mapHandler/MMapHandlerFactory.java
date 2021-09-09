@@ -46,6 +46,48 @@ public class MMapHandlerFactory {
         switch (methodId) {
             case Constants.FMMMapStateMethodId.sMapSetStyleMethod:
             case Constants.FMMMapStateMethodId.sMapSetCenterMethod:
+            case Constants.FMMMapStateMethodId.sMapGetCenterMethod:
+            case Constants.FMMMapStateMethodId.sMapSetZoomMethod:
+            case Constants.FMMMapStateMethodId.sMapGetZoomMethod:
+            case Constants.FMMMapStateMethodId.sMapSetMinZoomPreferenceMethod:
+            case Constants.FMMMapStateMethodId.sMapGetMinZoomLevelMethod:
+            case Constants.FMMMapStateMethodId.sMapSetMaxZoomPreferenceMethod:
+            case Constants.FMMMapStateMethodId.sMapGetMaxZoomLevelMethod:
+            case Constants.FMMMapStateMethodId.sMapSetTiltMethod:
+            case Constants.FMMMapStateMethodId.sMapGetTiltMethod:
+            case Constants.FMMMapStateMethodId.sMapSetBearingMethod:
+            case Constants.FMMMapStateMethodId.sMapGetBearingMethod:
+            case Constants.FMMMapStateMethodId.sMapSetWmtsEnabledMethod:
+            case Constants.FMMMapStateMethodId.sMapGetWmtsEnabledMethod:
+            case Constants.FMMMapStateMethodId.sMapSetOdevityMethod:
+            case Constants.FMMMapStateMethodId.sMapSetOdevityForTrafficMethod:
+            case Constants.FMMMapStateMethodId.sMapGetOdevityMethod:
+            case Constants.FMMMapStateMethodId.sMapGetOdevityForTrafficMethod:
+            case Constants.FMMMapStateMethodId.sMapSetTrafficShowMethod:
+            case Constants.FMMMapStateMethodId.sMapSetTrafficRoteMethod:
+            case Constants.FMMMapStateMethodId.sMapUpDataTrafficMethod:
+            case Constants.FMMMapStateMethodId.sMapSetAreaTrafficMethod:
+            case Constants.FMMMapStateMethodId.sMapSetRepaintMethod:
+            case Constants.FMMMapStateMethodId.sMapSetDebugActiveMethod:
+            case Constants.FMMMapStateMethodId.sMapIsDebugActiveMethod:
+            case Constants.FMMMapStateMethodId.sMapResetNorthMethod:
+            case Constants.FMMMapStateMethodId.sMapCancelTransitionsMethod:
+            case Constants.FMMMapStateMethodId.sMapMoveCameraMethod:
+            case Constants.FMMMapStateMethodId.sMapEaseCameraMethod:
+            case Constants.FMMMapStateMethodId.sMapAnimateCameraMethod:
+            case Constants.FMMMapStateMethodId.sMapGetCameraPositionMethod:
+            case Constants.FMMMapStateMethodId.sMapSetLatLngBoundsForCameraTargetMethod:
+            case Constants.FMMMapStateMethodId.sMapGetCameraForLatLngBoundsMethod:
+            case Constants.FMMMapStateMethodId.sMapSetPaddingMethod:
+            case Constants.FMMMapStateMethodId.sMapGetPaddingMethod:
+            case Constants.FMMMapStateMethodId.sMapSetMultipleInfoWindowsMethod:
+            case Constants.FMMMapStateMethodId.sMapAddImageMethod:
+            case Constants.FMMMapStateMethodId.sMapAddImagesMethod:
+            case Constants.FMMMapStateMethodId.sMapRemoveImageMethod:
+            case Constants.FMMMapStateMethodId.sMapRemoveImagesMethod:
+            case Constants.FMMMapStateMethodId.sMapRemoveImagesAllMethod:
+            case Constants.FMMMapStateMethodId.sMapGetImageMethod:
+            case Constants.FMMMapStateMethodId.sMapOfflineDataUpdateMethod:
                 mMapHandler = mMapHandlerHashMap.get(Constants.MMapHandlerType.MAP_STATE);
                 break;
             case Constants.FMMClusterLayerMethodId.sMapAddClusterLayerMethod:

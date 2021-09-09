@@ -41,8 +41,56 @@ public class MapStateHandler extends MMapHandler {
             case Constants.FMMMapStateMethodId.sMapSetCenterMethod:
                 setCenter(call, result);
                 break;
+            case Constants.FMMMapStateMethodId.sMapSetZoomMethod:
+                setZoom(call, result);
+                break;
+            case Constants.FMMMapStateMethodId.sMapSetMinZoomPreferenceMethod:
+                setMinZoom(call, result);
+                break;
+            case Constants.FMMMapStateMethodId.sMapSetMaxZoomPreferenceMethod:
+                setMaxZoom(call, result);
+                break;
             default:
                 break;
+        }
+    }
+
+    /**
+     *
+     * @param call
+     * @param result
+     */
+    private void setMaxZoom(MethodCall call, MethodChannel.Result result) {
+        Integer zoom = FMMMapConveter.toInt(call.arguments);
+        if (zoom != null) {
+            mMapController.setMaxZoomLevel(zoom);
+            result.success(true);
+        }
+    }
+
+    /**
+     *
+     * @param call
+     * @param result
+     */
+    private void setMinZoom(MethodCall call, MethodChannel.Result result) {
+        Integer zoom = FMMMapConveter.toInt(call.arguments);
+        if (zoom != null) {
+            mMapController.setMinZoomLevel(zoom);
+            result.success(true);
+        }
+    }
+
+    /**
+     *
+     * @param call
+     * @param result
+     */
+    private void setZoom(MethodCall call, MethodChannel.Result result) {
+        Integer zoom = FMMMapConveter.toInt(call.arguments);
+        if (zoom != null) {
+            mMapController.setZoomLevel(zoom);
+            result.success(true);
         }
     }
 

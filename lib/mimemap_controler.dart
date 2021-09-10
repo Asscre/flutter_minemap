@@ -53,6 +53,51 @@ class MineMapController {
     return result;
   }
 
+  /// setMaxZoom
+  Future<bool> setMaxZoom(int zoom) async {
+    if (_mapChannel == null) {
+      return false;
+    }
+    bool result = false;
+    try {
+      result = (await _mapChannel.invokeMethod(
+          FMMMapStateMethodId.kMapSetMaxZoomPreferenceMethod, zoom)) as bool;
+    } on PlatformException catch (e) {
+      print(e.toString());
+    }
+    return result;
+  }
+
+  /// setMinZoom
+  Future<bool> setMinZoom(int zoom) async {
+    if (_mapChannel == null) {
+      return false;
+    }
+    bool result = false;
+    try {
+      result = (await _mapChannel.invokeMethod(
+          FMMMapStateMethodId.kMapSetMinZoomPreferenceMethod, zoom)) as bool;
+    } on PlatformException catch (e) {
+      print(e.toString());
+    }
+    return result;
+  }
+
+  /// setZoom
+  Future<bool> setZoom(int zoom) async {
+    if (_mapChannel == null) {
+      return false;
+    }
+    bool result = false;
+    try {
+      result = (await _mapChannel.invokeMethod(
+          FMMMapStateMethodId.kMapSetZoomMethod, zoom)) as bool;
+    } on PlatformException catch (e) {
+      print(e.toString());
+    }
+    return result;
+  }
+
   /// 添加聚合点图层
   Future<bool> addClusterLayer(ClusterLayerModel params) async {
     print(params);

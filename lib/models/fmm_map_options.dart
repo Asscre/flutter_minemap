@@ -96,7 +96,7 @@ class FMMMapOptions {
 
   FMMMapOptions({
     this.mapType: FMMMapType.Base,
-    this.trafficEnabled: true,
+    this.trafficEnabled: false,
     this.trafficRote: 60,
     this.center,
     this.zoomLevel: 17,
@@ -111,7 +111,7 @@ class FMMMapOptions {
     this.connected,
     this.compassEnabled: true,
     this.logoEnabled: true,
-    this.attributionEnabled: true,
+    this.attributionEnabled: false,
     this.scaleEnabled: true,
     this.rotateGesturesEnabled: true,
     this.tiltGesturesEnabled: true,
@@ -119,7 +119,7 @@ class FMMMapOptions {
     this.zoomControlsEnabled: true,
     this.doubleTapGesturesEnabled: true,
     this.scrollGesturesEnabled: true,
-    this.allGesturesEnabled: true,
+    this.allGesturesEnabled: false,
     @required this.accessToken,
     @required this.offlineAccessToken,
     @required this.solution,

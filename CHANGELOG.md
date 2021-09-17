@@ -5,3 +5,12 @@
 ## 0.0.1+dev.2
 
 * Android地图 Failed to load native shared library.
+
+## 0.0.1+dev.3
+
+* Add some setMapStyle function
+
+## 0.0.1+dev.4
+
+* 规划map初始化
+* 修改setMapType方法，改为传入styleUrl

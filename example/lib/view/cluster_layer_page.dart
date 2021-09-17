@@ -41,7 +41,7 @@ class _ClusterLayerPageState extends State<ClusterLayerPage> {
     return Expanded(
       child: MineMapView(
         mapOptions: FMMMapOptions(
-          mapType: FMMMapType.Satellite,
+          mapType: Config.mBase,
           offlineAccessToken: Config.offlineAccessToken,
           accessToken: Config.accessToken,
           solution: Config.solution,

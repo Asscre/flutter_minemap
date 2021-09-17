@@ -11,7 +11,7 @@ class FMMMapOptions {
   /// 标准地图 = MapTypeNight
   ///
   /// 卫星地图 = MapTypeSatellite
-  FMMMapType mapType;
+  String mapType;
 
   /// 设定地图是否打开路况图层
   bool trafficEnabled;
@@ -95,31 +95,31 @@ class FMMMapOptions {
   String solution;
 
   FMMMapOptions({
-    this.mapType: FMMMapType.Base,
-    this.trafficEnabled: false,
-    this.trafficRote: 60,
+    this.trafficEnabled,
+    this.trafficRote,
     this.center,
-    this.zoomLevel: 17,
-    this.maxZoomLevel: 17,
-    this.minZoomLevel: 3,
-    this.tilt,
-    this.bearing,
+    this.zoomLevel: 8,
+    this.maxZoomLevel,
+    this.minZoomLevel,
+    this.tilt: 0,
+    this.bearing: 0,
     this.wmtsEnabled,
     this.repaint,
-    this.showDebugActive: true,
+    this.showDebugActive,
     this.fillWaterEnabled,
     this.connected,
-    this.compassEnabled: true,
-    this.logoEnabled: true,
-    this.attributionEnabled: false,
-    this.scaleEnabled: true,
-    this.rotateGesturesEnabled: true,
-    this.tiltGesturesEnabled: true,
-    this.zoomGesturesEnabled: true,
-    this.zoomControlsEnabled: true,
-    this.doubleTapGesturesEnabled: true,
-    this.scrollGesturesEnabled: true,
-    this.allGesturesEnabled: false,
+    this.compassEnabled,
+    this.logoEnabled,
+    this.attributionEnabled,
+    this.scaleEnabled,
+    this.rotateGesturesEnabled,
+    this.tiltGesturesEnabled,
+    this.zoomGesturesEnabled,
+    this.zoomControlsEnabled,
+    this.doubleTapGesturesEnabled,
+    this.scrollGesturesEnabled,
+    this.allGesturesEnabled,
+    @required this.mapType,
     @required this.accessToken,
     @required this.offlineAccessToken,
     @required this.solution,
@@ -128,7 +128,7 @@ class FMMMapOptions {
   /// FMMMapOptions -> map
   Map<String, Object> toMap() {
     return {
-      'mapType': this.mapType?.index,
+      'mapType': this.mapType,
       'trafficEnabled': this.trafficEnabled,
       'trafficRote': this.trafficRote,
       'center': this.center?.toMap(),

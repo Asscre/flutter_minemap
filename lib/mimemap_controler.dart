@@ -24,14 +24,14 @@ class MineMapController {
   /// flutter -> native
   ///
   /// 设置地图样式
-  Future<bool> setMapStyle(FMMMapType fmmMapType) async {
+  Future<bool> setMapStyle(String mapType) async {
     if (_mapChannel == null) {
       return false;
     }
     bool result = false;
     try {
       result = (await _mapChannel.invokeMethod(
-          FMMMapStateMethodId.kMapSetStyleMethod, fmmMapType.index)) as bool;
+          FMMMapStateMethodId.kMapSetStyleMethod, mapType)) as bool;
     } on PlatformException catch (e) {
       print(e.toString());
     }

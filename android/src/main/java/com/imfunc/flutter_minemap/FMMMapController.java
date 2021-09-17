@@ -11,6 +11,7 @@ import androidx.annotation.Nullable;
 import com.imfunc.flutter_minemap.interfaces.MineMapInterface;
 import com.imfunc.flutter_minemap.unil.Config;
 import com.imfunc.flutter_minemap.unil.Constants;
+import com.imfunc.flutter_minemap.unil.conveter.FMMMapConveter;
 import com.imfunc.flutter_minemap.views.mapHandler.MMapHandlerFactory;
 import com.minedata.minemap.MinemapAccountManager;
 import com.minedata.minemap.camera.CameraPosition;
@@ -63,7 +64,7 @@ public class FMMMapController implements MethodChannel.MethodCallHandler, Applic
     }
 
     ///  初始化地图组件
-    private void initMap(Map<String, Object> creationParams) {
+    private void initMap(final Map<String, Object> creationParams) {
         String accessToken = creationParams.get("accessToken").toString();
         String offlineAccessToken = creationParams.get("offlineAccessToken").toString();
         String solution = creationParams.get("solution").toString();
@@ -79,27 +80,26 @@ public class FMMMapController implements MethodChannel.MethodCallHandler, Applic
             public void onMapReady(final MineMap oMineMap) {
                 mineMap = oMineMap;
 
-                mineMap.setStyleUrl(Config.mBase);
-                mineMap.setCameraPosition(
-                        new CameraPosition.Builder()
-                                // 设置相机指向的位置
-                                // 116.404844,39.912057
-                                .target(new LatLng(39.912057, 116.404269))
-                                // 设置相机缩放等级
-                                .zoom(8)
-                                // 设置相机的俯视角度
-                                .tilt(0)
-                                // 摄像机指向的方向,从北部顺时针方向设置
-                                .bearing(0)
-                                .build());
+//                mineMap.setStyleUrl(Config.mBase);
+//                mineMap.setCameraPosition(
+//                        new CameraPosition.Builder()
+//                                // 设置相机指向的位置
+//                                // 116.404844,39.912057
+//                                .target(new LatLng(39.912057, 116.404269))
+//                                // 设置相机缩放等级
+//                                .zoom(8)
+//                                // 设置相机的俯视角度
+//                                .tilt(0)
+//                                // 摄像机指向的方向,从北部顺时针方向设置
+//                                .bearing(0)
+//                                .build()
+//                );
+                uiSettings = mineMap.getUiSettings();
+                setBaseMap(creationParams);
             }
         });
 
         mapView.onStart();
-
-        if (mineMap != null) {
-            uiSettings = mineMap.getUiSettings();
-        }
     }
 
     public MapView getMapView() {
@@ -122,19 +122,192 @@ public class FMMMapController implements MethodChannel.MethodCallHandler, Applic
     public MineMap getMineMap() {
         return  mineMap;
     }
+    
+    private void setBaseMap(Map<String, Object> args) {
+        if (args.containsKey("mapType") ) {
+            String mapType = args.get("mapType").toString();
+            if (mapType !=  null) {
+                setMapType(mapType);
+            } else {
+                setMapType(Config.mBase);
+            }
+        }
+
+        if (args.containsKey("trafficEnabled") ) {
+            Boolean trafficEnabled = FMMMapConveter.toBoolean(args.get("trafficEnabled"));
+            if (trafficEnabled != null) {
+                setTrafficEnabled(trafficEnabled);
+            }
+        }
+
+        if (args.containsKey("trafficRote") ) {
+            Integer trafficRote = FMMMapConveter.toInt(args.get("trafficRote"));
+            if (trafficRote != null) {
+                setTrafficRote(trafficRote);
+            }
+        }
+
+        if (args.containsKey("center") ) {
+            LatLng center = FMMMapConveter.mapToLatlng((Map<String, Object>) args.get("center"));
+            if (center != null) {
+                setCenter(center);
+            }
+        }
+
+        if (args.containsKey("zoomLevel") ) {
+            Integer zoomLevel = FMMMapConveter.toInt(args.get("zoomLevel"));
+            if (zoomLevel != null) {
+                setZoomLevel(zoomLevel);
+            }
+        }
+
+        if (args.containsKey("maxZoomLevel") ) {
+            Integer maxZoomLevel = FMMMapConveter.toInt(args.get("maxZoomLevel"));
+            if (maxZoomLevel != null) {
+                setMaxZoomLevel(maxZoomLevel);
+            }
+        }
+
+        if (args.containsKey("minZoomLevel") ) {
+            Integer minZoomLevel = FMMMapConveter.toInt(args.get("minZoomLevel"));
+            if (minZoomLevel != null) {
+                setMinZoomLevel(minZoomLevel);
+            }
+        }
+
+        if (args.containsKey("tilt") ) {
+            Integer tilt = FMMMapConveter.toInt(args.get("tilt"));
+            if (tilt != null) {
+                setTilt(tilt);
+            }
+        }
+
+        if (args.containsKey("bearing") ) {
+            Integer bearing = FMMMapConveter.toInt(args.get("bearing"));
+            if (bearing != null) {
+                setBearing(bearing);
+            }
+        }
+
+        if (args.containsKey("wmtsEnabled") ) {
+            Boolean wmtsEnabled = FMMMapConveter.toBoolean(args.get("wmtsEnabled"));
+            if (wmtsEnabled != null) {
+                setWmtsEnabled(wmtsEnabled);
+            }
+        }
+
+        if (args.containsKey("repaint") ) {
+            Boolean repaint = FMMMapConveter.toBoolean(args.get("repaint"));
+            if (repaint != null) {
+                setRepaint(repaint);
+            }
+        }
+
+        if (args.containsKey("showDebugActive") ) {
+            Boolean showDebugActive = FMMMapConveter.toBoolean(args.get("showDebugActive"));
+            if (showDebugActive != null) {
+                setShowDebugActive(showDebugActive);
+            }
+        }
+
+        if (args.containsKey("fillWaterEnabled") ) {
+            Boolean fillWaterEnabled = FMMMapConveter.toBoolean(args.get("fillWaterEnabled"));
+            if (fillWaterEnabled != null) {
+                setFillWaterEnabled(fillWaterEnabled);
+            }
+        }
+
+        if (args.containsKey("connected") ) {
+            Boolean connected = FMMMapConveter.toBoolean(args.get("connected"));
+            if (connected != null) {
+                setConnected(connected);
+            }
+        }
+
+        if (args.containsKey("compassEnabled") ) {
+            Boolean compassEnabled = FMMMapConveter.toBoolean(args.get("compassEnabled"));
+            if (compassEnabled != null) {
+                setCompassEnabled(compassEnabled);
+            }
+        }
+
+        if (args.containsKey("logoEnabled") ) {
+            Boolean logoEnabled = FMMMapConveter.toBoolean(args.get("logoEnabled"));
+            if (logoEnabled != null) {
+                setLogoEnabled(logoEnabled);
+            }
+        }
+
+        if (args.containsKey("attributionEnabled") ) {
+            Boolean attributionEnabled = FMMMapConveter.toBoolean(args.get("attributionEnabled"));
+            if (attributionEnabled != null) {
+                setAttributionEnabled(attributionEnabled);
+            }
+        }
+
+        if (args.containsKey("scaleEnabled") ) {
+            Boolean scaleEnabled = FMMMapConveter.toBoolean(args.get("scaleEnabled"));
+            if (scaleEnabled != null) {
+                setScaleEnabled(scaleEnabled);
+            }
+        }
+
+        if (args.containsKey("rotateGesturesEnabled") ) {
+            Boolean rotateGesturesEnabled = FMMMapConveter.toBoolean(args.get("rotateGesturesEnabled"));
+            if (rotateGesturesEnabled != null) {
+                setRotateGesturesEnabled(rotateGesturesEnabled);
+            }
+        }
+
+        if (args.containsKey("tiltGesturesEnabled") ) {
+            Boolean tiltGesturesEnabled = FMMMapConveter.toBoolean(args.get("tiltGesturesEnabled"));
+            if (tiltGesturesEnabled != null) {
+                setTiltGesturesEnabled(tiltGesturesEnabled);
+            }
+        }
+
+        if (args.containsKey("zoomGesturesEnabled") ) {
+            Boolean zoomGesturesEnabled = FMMMapConveter.toBoolean(args.get("zoomGesturesEnabled"));
+            if (zoomGesturesEnabled != null) {
+                setZoomGesturesEnabled(zoomGesturesEnabled);
+            }
+        }
+
+        if (args.containsKey("zoomControlsEnabled") ) {
+            Boolean zoomControlsEnabled = FMMMapConveter.toBoolean(args.get("zoomControlsEnabled"));
+            if (zoomControlsEnabled != null) {
+                setZoomControlsEnabled(zoomControlsEnabled);
+            }
+        }
+
+        if (args.containsKey("doubleTapGesturesEnabled") ) {
+            Boolean doubleTapGesturesEnabled = FMMMapConveter.toBoolean(args.get("doubleTapGesturesEnabled"));
+            if (doubleTapGesturesEnabled != null) {
+                setDoubleTapGesturesEnabled(doubleTapGesturesEnabled);
+            }
+        }
+
+        if (args.containsKey("scrollGesturesEnabled") ) {
+            Boolean scrollGesturesEnabled = FMMMapConveter.toBoolean(args.get("scrollGesturesEnabled"));
+            if (scrollGesturesEnabled != null) {
+                setScrollGesturesEnabled(scrollGesturesEnabled);
+            }
+        }
+
+        if (args.containsKey("allGesturesEnabled") ) {
+            Boolean allGesturesEnabled = FMMMapConveter.toBoolean(args.get("allGesturesEnabled"));
+            if (allGesturesEnabled != null) {
+                setAllGesturesEnabled(allGesturesEnabled);
+            }
+        }
+    }
 
     @Override
-    public void setMapType(Integer mapType) {
+    public void setMapType(String mapType) {
         if (mineMap != null && mapType != null) {
             String url;
-            if (mapType == 0) {
-                url = Config.mBase;
-            } else if (mapType == 1) {
-                url = Config.mBlack;
-            } else {
-                url = Config.mGPS;
-            }
-            mineMap.setStyleUrl(url);
+
+            mineMap.setStyleUrl(mapType);
         }
     }
 

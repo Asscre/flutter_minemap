@@ -37,7 +37,7 @@ class _MapStylePageState extends State<MapStylePage> {
   Widget _map() {
     return MineMapView(
       mapOptions: FMMMapOptions(
-        mapType: FMMMapType.Satellite,
+        mapType: Config.mBase,
         offlineAccessToken: Config.offlineAccessToken,
         accessToken: Config.accessToken,
         solution: Config.solution,
@@ -58,19 +58,19 @@ class _MapStylePageState extends State<MapStylePage> {
         children: [
           TextButton(
             onPressed: () {
-              _mineMapController.setMapStyle(FMMMapType.Base);
+              _mineMapController.setMapStyle(Config.mBase);
             },
             child: Text('基础地图'),
           ),
           TextButton(
             onPressed: () {
-              _mineMapController.setMapStyle(FMMMapType.Night);
+              _mineMapController.setMapStyle(Config.mBlack);
             },
             child: Text('黑夜地图'),
           ),
           TextButton(
             onPressed: () {
-              _mineMapController.setMapStyle(FMMMapType.Satellite);
+              _mineMapController.setMapStyle(Config.mGPS);
             },
             child: Text('卫星地图'),
           ),

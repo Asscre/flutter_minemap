@@ -37,11 +37,11 @@ class _BaseMapPageState extends State<BaseMapPage> {
         alignment: Alignment.center,
         child: MineMapView(
           mapOptions: FMMMapOptions(
-            mapType: FMMMapType.Satellite,
+            mapType: Config.mBase,
             offlineAccessToken: Config.offlineAccessToken,
             accessToken: Config.accessToken,
             solution: Config.solution,
-            center: FMMCoordinate(38.913828, 116.405419),
+            center: FMMCoordinate(31.233706, 121.477091),
             logoEnabled: false,
           ),
           onMineMapViewCreated: (MineMapController controller) {

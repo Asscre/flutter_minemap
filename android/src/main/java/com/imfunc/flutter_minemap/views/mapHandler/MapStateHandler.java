@@ -112,7 +112,7 @@ public class MapStateHandler extends MMapHandler {
      */
     private void setMapType(MethodCall call,
                             MethodChannel.Result result) {
-        Integer mapType = call.arguments();
+        String mapType = call.arguments();
 
         mMapController.setMapType(mapType);
 

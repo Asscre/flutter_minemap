@@ -6,7 +6,11 @@ import android.view.View;
 import androidx.annotation.NonNull;
 
 import com.imfunc.flutter_minemap.FMMMapController;
+import com.imfunc.flutter_minemap.unil.conveter.FMMMapConveter;
+import com.minedata.minemap.geometry.LatLng;
 import com.minedata.minemap.map.MapView;
+
+import java.util.Map;
 
 import io.flutter.Log;
 import io.flutter.plugin.platform.PlatformView;
@@ -17,17 +21,13 @@ public class FlutterMapView implements PlatformView {
 
     private MapView mapView;
 
-    private Context mContext;
-
     private FMMMapController mMapController;
 
-    public FlutterMapView(@NonNull Context context, FMMMapController fmmMapController) {
-        this.mContext = context;
+    public FlutterMapView(FMMMapController fmmMapController) {
 
         this.mMapController = fmmMapController;
 
         mapView = mMapController.getMapView();
-
     }
 
     @Override

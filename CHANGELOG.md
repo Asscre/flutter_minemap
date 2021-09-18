@@ -14,3 +14,7 @@
 
 * 规划map初始化
 * 修改setMapType方法，改为传入styleUrl
+
+## 0.0.2
+
+* update minemap sdk version 3.0.1 to 3.0.2

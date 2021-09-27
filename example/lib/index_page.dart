@@ -23,7 +23,9 @@ class _IndexPageState extends State<IndexPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Plugin example app'),
+        title: const Text('FlutterMinemap'),
+        centerTitle: true,
+        backgroundColor: Colors.indigo,
       ),
       body: ListView.builder(
         itemCount: _btnList.length,
@@ -56,11 +58,12 @@ class _IndexPageState extends State<IndexPage> {
       onTap: d.func,
       title: Text(
         d.title,
-        style: TextStyle(
-          fontSize: 16,
-        ),
+        style: TextStyle(fontSize: 16, color: Colors.indigo),
       ),
-      subtitle: Text(d.subtitle),
+      subtitle: Text(
+        d.subtitle,
+        style: TextStyle(fontSize: 16, color: Colors.lightBlueAccent),
+      ),
     );
   }
 

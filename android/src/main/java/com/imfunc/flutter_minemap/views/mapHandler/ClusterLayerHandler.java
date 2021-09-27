@@ -78,6 +78,7 @@ public class ClusterLayerHandler extends MMapHandler{
         Map<Integer, String> icons = new HashMap<>();
         icons.put(0, bitmapName);
 
+        /// 获取时间戳
         Long startTs = System.currentTimeMillis();
 
         options =

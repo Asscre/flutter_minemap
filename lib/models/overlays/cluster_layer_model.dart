@@ -16,8 +16,13 @@ class ClusterLayerModel {
   final int minZoom;
   final List<FMMCoordinate> latLngs;
 
-  ClusterLayerModel({this.clusterRadius: 200, this.textColor: Colors.white, this.textFontSize: 14,
-      this.maxZoom: 11, this.minZoom: 3, this.latLngs})
+  ClusterLayerModel(
+      {this.clusterRadius: 200,
+      this.textColor: Colors.white,
+      this.textFontSize: 14,
+      this.maxZoom: 11,
+      this.minZoom: 0,
+      this.latLngs})
       : assert(latLngs != null);
 
   Map<String, Object> toMap() {

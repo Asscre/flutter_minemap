@@ -18,3 +18,7 @@
 ## 0.0.2
 
 * update minemap sdk version 3.0.1 to 3.0.2
+
+## 0.0.3
+
+* 新增内部局域网中服务配置：apiBaseUrl apiUrl and spriteImageUrl

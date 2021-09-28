@@ -94,6 +94,11 @@ class FMMMapOptions {
   /// solution
   String solution;
 
+  /// 单独网络环境时设置服务地址
+  String apiBaseUrl;
+  String apiUrl;
+  String spriteImageUrl;
+
   FMMMapOptions({
     this.trafficEnabled,
     this.trafficRote,
@@ -119,6 +124,9 @@ class FMMMapOptions {
     this.doubleTapGesturesEnabled,
     this.scrollGesturesEnabled,
     this.allGesturesEnabled,
+    this.apiBaseUrl,
+    this.apiUrl,
+    this.spriteImageUrl,
     @required this.mapType,
     @required this.accessToken,
     @required this.offlineAccessToken,
@@ -156,6 +164,9 @@ class FMMMapOptions {
       'accessToken': this.accessToken ?? '',
       'offlineAccessToken': this.offlineAccessToken ?? '',
       'solution': this.solution ?? '',
+      'apiBaseUrl': this.apiBaseUrl,
+      'apiUrl': this.apiUrl,
+      'spriteImageUrl': this.spriteImageUrl,
     };
   }
 }

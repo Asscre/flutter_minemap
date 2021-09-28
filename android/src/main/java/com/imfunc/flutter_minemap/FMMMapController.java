@@ -68,6 +68,9 @@ public class FMMMapController implements MethodChannel.MethodCallHandler, Applic
         String accessToken = creationParams.get("accessToken").toString();
         String offlineAccessToken = creationParams.get("offlineAccessToken").toString();
         String solution = creationParams.get("solution").toString();
+        String apiBaseUrl = creationParams.get("apiBaseUrl").toString();
+        String apiUrl = creationParams.get("apiUrl").toString();
+        String spriteImageUrl = creationParams.get("spriteImageUrl").toString();
 
         MinemapAccountManager.getInstance(application, accessToken,
                 offlineAccessToken,
@@ -75,11 +78,16 @@ public class FMMMapController implements MethodChannel.MethodCallHandler, Applic
 
         mapView = new MapView(mContext);
 
+        if (apiBaseUrl != null && !apiBaseUrl.equals("") && apiUrl != null && !apiUrl.equals("") && spriteImageUrl != null && !spriteImageUrl.equals("")) {
+            mapView.setApiBaseUrl(apiBaseUrl);
+            mapView.setApiUrl(apiUrl);
+            mapView.setSpriteImageUrl(spriteImageUrl);
+        }
+
         mapView.addMapRenderCallback(new MapView.OnMapReadyListener() {
             @Override
             public void onMapReady(final MineMap oMineMap) {
                 mineMap = oMineMap;
-
                 uiSettings = mineMap.getUiSettings();
                 setBaseMap(creationParams);
             }

@@ -164,9 +164,9 @@ class FMMMapOptions {
       'accessToken': this.accessToken ?? '',
       'offlineAccessToken': this.offlineAccessToken ?? '',
       'solution': this.solution ?? '',
-      'apiBaseUrl': this.apiBaseUrl,
-      'apiUrl': this.apiUrl,
-      'spriteImageUrl': this.spriteImageUrl,
+      'apiBaseUrl': this.apiBaseUrl ?? '',
+      'apiUrl': this.apiUrl ?? '',
+      'spriteImageUrl': this.spriteImageUrl ?? '',
     };
   }
 }
